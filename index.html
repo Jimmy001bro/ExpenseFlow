@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ExpenseFlow · Personal Finance</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <i class="fas fa-wallet"></i>
+                <span>ExpenseFlow</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-view="dashboard">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-view="transactions">
+                    <i class="fas fa-list-ul"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="#" class="nav-item" data-view="analytics">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn btn-danger" id="clearAllData">
+                    <i class="fas fa-trash-alt"></i>
+                    <span>Clear All Data</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <div class="header-left">
+                    <h1 id="pageTitle">Dashboard</h1>
+                    <p id="pageSubtitle">Overview of your finances</p>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-primary" id="openAddModal">
+                        <i class="fas fa-plus"></i>
+                        <span>Add Transaction</span>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Dashboard View -->
+            <section id="dashboardView" class="view-section active">
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #dbeafe; color: #2563eb;">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Balance</span>
+                            <span class="stat-value" id="balanceDisplay">$0.00</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #d1fae5; color: #059669;">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Income</span>
+                            <span class="stat-value" id="incomeDisplay">$0.00</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fee2e2; color: #dc2626;">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Expenses</span>
+                            <span class="stat-value" id="expenseDisplay">$0.00</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fef3c7; color: #d97706;">
+                            <i class="fas fa-percent"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Savings Rate</span>
+                            <span class="stat-value" id="savingsRateDisplay">0%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Charts Row -->
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Spending by Category</h3>
+                        <div class="chart-container">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Income vs Expenses</h3>
+                        <div class="chart-container">
+                            <canvas id="incomeExpenseChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Transactions -->
+                <div class="recent-transactions">
+                    <div class="section-header">
+                        <h3>Recent Transactions</h3>
+                        <a href="#" class="view-all" data-view="transactions">View All</a>
+                    </div>
+                    <div class="transaction-list" id="recentTransactionList">
+                        <p style="text-align: center; color: #9ca3af; padding: 40px 0;">
+                            No transactions yet. Add your first one!
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Transactions View -->
+            <section id="transactionsView" class="view-section">
+                <div class="transactions-controls">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search transactions..." />
+                    </div>
+                    <div class="filter-group">
+                        <select id="categoryFilter">
+                            <option value="all">All Categories</option>
+                            <option value="food">Food</option>
+                            <option value="transport">Transport</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="bills">Bills</option>
+                            <option value="health">Health</option>
+                            <option value="education">Education</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <select id="typeFilter">
+                            <option value="all">All Types</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="transaction-list full-list" id="fullTransactionList">
+                    <p style="text-align: center; color: #9ca3af; padding: 40px 0;">
+                        No transactions yet.
+                    </p>
+                </div>
+            </section>
+            
+            <!-- Analytics View -->
+            <section id="analyticsView" class="view-section">
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>Monthly Summary</h3>
+                        <div class="analytics-stats">
+                            <div class="analytics-stat">
+                                <span class="label">Total Income</span>
+                                <span class="value income" id="analyticsIncome">$0.00</span>
+                            </div>
+                            <div class="analytics-stat">
+                                <span class="label">Total Expenses</span>
+                                <span class="value expense" id="analyticsExpense">$0.00</span>
+                            </div>
+                            <div class="analytics-stat">
+                                <span class="label">Net</span>
+                                <span class="value" id="analyticsNet">$0.00</span>
+                            </div>
+                            <div class="analytics-stat">
+                                <span class="label">Average Daily</span>
+                                <span class="value" id="analyticsDaily">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Top Spending Categories</h3>
+                        <div id="topCategoriesList">
+                            <p style="color: #9ca3af;">No data available</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Add Transaction Modal -->
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Transaction</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <form id="transactionForm">
+                <div class="form-group">
+                    <label for="transactionType">Type</label>
+                    <div class="type-toggle">
+                        <button type="button" class="type-btn active" data-type="expense">
+                            <i class="fas fa-arrow-down"></i> Expense
+                        </button>
+                        <button type="button" class="type-btn" data-type="income">
+                            <i class="fas fa-arrow-up"></i> Income
+                        </button>
+                    </div>
+                    <input type="hidden" id="transactionType" value="expense" />
+                </div>
+                
+                <div class="form-group">
+                    <label for="transactionDescription">Description</label>
+                    <input type="text" id="transactionDescription" placeholder="e.g., Coffee shop" required />
+                </div>
+                
+                <div class="form-group">
+                    <label for="transactionAmount">Amount</label>
+                    <input type="number" id="transactionAmount" placeholder="0.00" step="0.01" min="0.01" required />
+                </div>
+                
+                <div class="form-group">
+                    <label for="transactionCategory">Category</label>
+                    <select id="transactionCategory" required>
+                        <option value="">Select a category</option>
+                        <option value="food">🍔 Food</option>
+                        <option value="transport">🚗 Transport</option>
+                        <option value="entertainment">🎬 Entertainment</option>
+                        <option value="shopping">🛍️ Shopping</option>
+                        <option value="bills">📄 Bills</option>
+                        <option value="health">💊 Health</option>
+                        <option value="education">📚 Education</option>
+                        <option value="other">📌 Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="transactionDate">Date</label>
+                    <input type="date" id="transactionDate" required />
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-plus"></i> Add Transaction
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
