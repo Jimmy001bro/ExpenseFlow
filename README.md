@@ -8,7 +8,6 @@
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow.svg)
 
-![ExpenseFlow Dashboard](https://via.placeholder.com/800x400?text=ExpenseFlow+Screenshot)
 
 ## ✨ Features
 
@@ -19,19 +18,6 @@
 - **Local Storage** - All data persists after browser refresh
 - **Responsive** - Works on desktop, tablet, and mobile
 
-## 🚀 Quick Start
-
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/expenseflow.git
-```
-
-2. Open `index.html` in your browser
-
-3. Start tracking your finances!
-
-### Live Demo
-🔗 [View Live Demo](https://yourusername.github.io/expenseflow/)
 
 ## 📦 Project Structure
 
@@ -122,4 +108,3 @@ Project Link: (https://github.com/Jimmy001bro/ExpenseFlow)
 ---
 
 **Made with ❤️ for personal finance**
-```
