@@ -101,7 +101,7 @@ This project wouldn't be possible without these amazing tools:
 
 ## 📧 Contact
 
-Nima Ebrahimi - [nima80ir@gmail.com]
+Nima Ebrahimi - [nima80ir@gmail.com][jmharpi.tech@gmail.com]
 
 Project Link: (https://github.com/Jimmy001bro/ExpenseFlow)
 
