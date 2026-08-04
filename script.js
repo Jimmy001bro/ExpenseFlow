@@ -1,5 +1,5 @@
 // ============================================
-// EXPENSE FLOW - Main Application
+// EXPENSE FLOW 2.0 - Main Application
 // ============================================
 
 class ExpenseFlow {
@@ -8,17 +8,181 @@ class ExpenseFlow {
         this.currentView = 'dashboard';
         this.categoryChart = null;
         this.incomeExpenseChart = null;
+        this.currentLanguage = this.getStoredLanguage() || 'en';
+        this.translations = {};
         
         this.init();
+    }
+    
+    // ==========================================
+    // TRANSLATIONS
+    // ==========================================
+    getStoredLanguage() {
+        return localStorage.getItem('expenseFlowLanguage') || 'en';
+    }
+    
+    setStoredLanguage(lang) {
+        localStorage.setItem('expenseFlowLanguage', lang);
+    }
+    
+    getTranslations() {
+        return {
+            en: {
+                appName: 'ExpenseFlow',
+                navDashboard: 'Dashboard',
+                navTransactions: 'Transactions',
+                navAnalytics: 'Analytics',
+                clearData: 'Clear All Data',
+                dashboardTitle: 'Dashboard',
+                dashboardSubtitle: 'Overview of your finances',
+                addTransaction: 'Add Transaction',
+                balance: 'Balance',
+                totalIncome: 'Income',
+                totalExpenses: 'Expenses',
+                savingsRate: 'Savings Rate',
+                spendingByCategory: 'Spending by Category',
+                incomeVsExpenses: 'Income vs Expenses',
+                recentTransactions: 'Recent Transactions',
+                viewAll: 'View All',
+                noTransactions: 'No transactions yet. Add your first one!',
+                searchTransactions: 'Search transactions...',
+                allCategories: 'All Categories',
+                allTypes: 'All Types',
+                income: 'Income',
+                expense: 'Expense',
+                monthlySummary: 'Monthly Summary',
+                netSavings: 'Net Savings',
+                averageDaily: 'Average Daily',
+                topSpending: 'Top Spending Categories',
+                noData: 'No data available',
+                type: 'Type',
+                description: 'Description',
+                amount: 'Amount',
+                category: 'Category',
+                date: 'Date',
+                enterDescription: 'e.g., Coffee shop',
+                selectCategory: 'Select a category',
+                incomeCategories: 'Income',
+                expenseCategories: 'Expenses',
+                salary: '💼 Salary',
+                freelance: '💻 Freelance',
+                investment: '📈 Investment',
+                gift: '🎁 Gift',
+                otherIncome: '📌 Other Income',
+                food: '🍔 Food',
+                transport: '🚗 Transport',
+                entertainment: '🎬 Entertainment',
+                shopping: '🛍️ Shopping',
+                bills: '📄 Bills',
+                health: '💊 Health',
+                education: '📚 Education',
+                otherExpense: '📌 Other Expense'
+            },
+            fa: {
+                appName: '💰 مدیریت مالی',
+                navDashboard: 'داشبورد',
+                navTransactions: 'تراکنش‌ها',
+                navAnalytics: 'تحلیل‌ها',
+                clearData: 'حذف تمام داده‌ها',
+                dashboardTitle: 'داشبورد',
+                dashboardSubtitle: 'نمای کلی از وضعیت مالی شما',
+                addTransaction: 'افزودن تراکنش',
+                balance: 'موجودی',
+                totalIncome: 'درآمد',
+                totalExpenses: 'هزینه‌ها',
+                savingsRate: 'نرخ پس‌انداز',
+                spendingByCategory: 'هزینه بر اساس دسته‌بندی',
+                incomeVsExpenses: 'درآمد در مقابل هزینه',
+                recentTransactions: 'تراکنش‌های اخیر',
+                viewAll: 'مشاهده همه',
+                noTransactions: 'هیچ تراکنشی وجود ندارد. اولین تراکنش خود را اضافه کنید!',
+                searchTransactions: 'جستجوی تراکنش‌ها...',
+                allCategories: 'همه دسته‌بندی‌ها',
+                allTypes: 'همه انواع',
+                income: 'درآمد',
+                expense: 'هزینه',
+                monthlySummary: 'خلاصه ماهانه',
+                netSavings: 'پس‌انداز خالص',
+                averageDaily: 'میانگین روزانه',
+                topSpending: 'بیشترین دسته‌بندی‌های هزینه',
+                noData: 'داده‌ای موجود نیست',
+                type: 'نوع',
+                description: 'توضیحات',
+                amount: 'مبلغ',
+                category: 'دسته‌بندی',
+                date: 'تاریخ',
+                enterDescription: 'مثال: خرید از فروشگاه',
+                selectCategory: 'یک دسته‌بندی انتخاب کنید',
+                incomeCategories: 'درآمد',
+                expenseCategories: 'هزینه‌ها',
+                salary: '💼 حقوق',
+                freelance: '💻 فریلنسری',
+                investment: '📈 سرمایه‌گذاری',
+                gift: '🎁 هدیه',
+                otherIncome: '📌 سایر درآمدها',
+                food: '🍔 خوراک',
+                transport: '🚗 حمل و نقل',
+                entertainment: '🎬 سرگرمی',
+                shopping: '🛍️ خرید',
+                bills: '📄 قبوض',
+                health: '💊 سلامت',
+                education: '📚 آموزش',
+                otherExpense: '📌 سایر هزینه‌ها'
+            }
+        };
+    }
+    
+    getText(key) {
+        if (!this.translations[key]) {
+            this.translations = this.getTranslations();
+        }
+        return this.translations[this.currentLanguage]?.[key] || this.translations['en']?.[key] || key;
+    }
+    
+    translatePage() {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.dataset.i18n;
+            el.textContent = this.getText(key);
+        });
+        
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.dataset.i18nPlaceholder;
+            el.placeholder = this.getText(key);
+        });
+        
+        // Update document direction
+        if (this.currentLanguage === 'fa') {
+            document.body.classList.add('rtl');
+            document.documentElement.lang = 'fa';
+            document.documentElement.dir = 'rtl';
+        } else {
+            document.body.classList.remove('rtl');
+            document.documentElement.lang = 'en';
+            document.documentElement.dir = 'ltr';
+        }
+        
+        // Update chart legend if charts exist
+        this.setupCharts();
+    }
+    
+    toggleLanguage() {
+        this.currentLanguage = this.currentLanguage === 'en' ? 'fa' : 'en';
+        this.setStoredLanguage(this.currentLanguage);
+        this.translations = this.getTranslations();
+        this.translatePage();
+        this.renderAll();
+        this.setupCharts();
     }
     
     // ==========================================
     // INITIALIZATION
     // ==========================================
     init() {
+        this.translations = this.getTranslations();
         this.loadFromStorage();
         this.setupEventListeners();
         this.setupDateDefault();
+        this.translatePage();
         this.renderAll();
         this.setupCharts();
         this.updateUI();
@@ -32,13 +196,16 @@ class ExpenseFlow {
         if (data) {
             try {
                 this.transactions = JSON.parse(data);
+                if (this.transactions.length === 0) {
+                    this.transactions = this.getSampleData();
+                }
             } catch {
-                this.transactions = [];
+                this.transactions = this.getSampleData();
             }
         } else {
-            // Sample data for demo
             this.transactions = this.getSampleData();
         }
+        this.saveToStorage();
     }
     
     saveToStorage() {
@@ -54,14 +221,74 @@ class ExpenseFlow {
         };
         
         return [
-            { id: Date.now() + 1, type: 'income', description: 'Salary', amount: 3500, category: 'other', date: getDate(0) },
-            { id: Date.now() + 2, type: 'expense', description: 'Grocery shopping', amount: 156.72, category: 'food', date: getDate(1) },
-            { id: Date.now() + 3, type: 'expense', description: 'Uber ride', amount: 24.50, category: 'transport', date: getDate(2) },
-            { id: Date.now() + 4, type: 'expense', description: 'Netflix subscription', amount: 15.99, category: 'entertainment', date: getDate(3) },
-            { id: Date.now() + 5, type: 'expense', description: 'New headphones', amount: 89.99, category: 'shopping', date: getDate(4) },
-            { id: Date.now() + 6, type: 'income', description: 'Freelance project', amount: 450, category: 'other', date: getDate(5) },
-            { id: Date.now() + 7, type: 'expense', description: 'Electric bill', amount: 78.34, category: 'bills', date: getDate(6) },
+            { id: Date.now() + 1, type: 'income', description: 'Salary - TechCorp Inc.', amount: 4850.00, category: 'salary', date: getDate(0) },
+            { id: Date.now() + 2, type: 'expense', description: 'Whole Foods Market', amount: 234.67, category: 'food', date: getDate(1) },
+            { id: Date.now() + 3, type: 'expense', description: 'Uber Ride to Airport', amount: 42.50, category: 'transport', date: getDate(1) },
+            { id: Date.now() + 4, type: 'expense', description: 'Netflix Subscription', amount: 15.99, category: 'entertainment', date: getDate(2) },
+            { id: Date.now() + 5, type: 'expense', description: 'Apple AirPods Pro', amount: 249.00, category: 'shopping', date: getDate(3) },
+            { id: Date.now() + 6, type: 'income', description: 'Freelance Website Project', amount: 750.00, category: 'freelance', date: getDate(4) },
+            { id: Date.now() + 7, type: 'expense', description: 'Electricity Bill - PGE', amount: 134.28, category: 'bills', date: getDate(4) },
+            { id: Date.now() + 8, type: 'expense', description: 'Gym Membership - FitnessFirst', amount: 89.99, category: 'health', date: getDate(5) },
+            { id: Date.now() + 9, type: 'expense', description: 'Amazon - Home Supplies', amount: 76.43, category: 'shopping', date: getDate(6) },
+            { id: Date.now() + 10, type: 'expense', description: 'Pizza Night - Domino\'s', amount: 32.50, category: 'food', date: getDate(7) },
+            { id: Date.now() + 11, type: 'income', description: 'Dividend Payment - VTI', amount: 185.40, category: 'investment', date: getDate(8) },
+            { id: Date.now() + 12, type: 'expense', description: 'Spotify Premium', amount: 11.99, category: 'entertainment', date: getDate(9) },
+            { id: Date.now() + 13, type: 'expense', description: 'Gas - Shell Station', amount: 54.20, category: 'transport', date: getDate(10) },
+            { id: Date.now() + 14, type: 'expense', description: 'Udemy Course - JavaScript', amount: 89.99, category: 'education', date: getDate(11) },
+            { id: Date.now() + 15, type: 'income', description: 'Bonus - Performance Q4', amount: 1200.00, category: 'salary', date: getDate(12) },
+            { id: Date.now() + 16, type: 'expense', description: 'Internet Bill - Comcast', amount: 79.99, category: 'bills', date: getDate(13) },
+            { id: Date.now() + 17, type: 'expense', description: 'Starbucks - Weekly Coffee', amount: 18.75, category: 'food', date: getDate(14) },
+            { id: Date.now() + 18, type: 'expense', description: 'New Running Shoes - Nike', amount: 129.99, category: 'shopping', date: getDate(15) },
+            { id: Date.now() + 19, type: 'expense', description: 'Dentist Appointment', amount: 165.00, category: 'health', date: getDate(16) },
+            { id: Date.now() + 20, type: 'income', description: 'Birthday Gift from Family', amount: 200.00, category: 'gift', date: getDate(17) }
         ];
+    }
+    
+    // ==========================================
+    // CATEGORY HELPERS
+    // ==========================================
+    getCategoryDisplay(category, type) {
+        if (type === 'income') {
+            const map = {
+                salary: this.getText('salary'),
+                freelance: this.getText('freelance'),
+                investment: this.getText('investment'),
+                gift: this.getText('gift'),
+                other_income: this.getText('otherIncome')
+            };
+            return map[category] || category;
+        } else {
+            const map = {
+                food: this.getText('food'),
+                transport: this.getText('transport'),
+                entertainment: this.getText('entertainment'),
+                shopping: this.getText('shopping'),
+                bills: this.getText('bills'),
+                health: this.getText('health'),
+                education: this.getText('education'),
+                other_expense: this.getText('otherExpense')
+            };
+            return map[category] || category;
+        }
+    }
+    
+    getCategoryIcon(category) {
+        const map = {
+            salary: '💼',
+            freelance: '💻',
+            investment: '📈',
+            gift: '🎁',
+            other_income: '📌',
+            food: '🍔',
+            transport: '🚗',
+            entertainment: '🎬',
+            shopping: '🛍️',
+            bills: '📄',
+            health: '💊',
+            education: '📚',
+            other_expense: '📌'
+        };
+        return map[category] || '📌';
     }
     
     // ==========================================
@@ -100,6 +327,7 @@ class ExpenseFlow {
                 document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 document.getElementById('transactionType').value = btn.dataset.type;
+                this.updateCategoryOptions(btn.dataset.type);
             });
         });
         
@@ -111,13 +339,18 @@ class ExpenseFlow {
         
         // Clear all data
         document.getElementById('clearAllData')?.addEventListener('click', () => {
-            if (confirm('Delete all transaction data?')) {
+            if (confirm(this.getText('clearData') + '?')) {
                 this.transactions = [];
                 this.saveToStorage();
                 this.renderAll();
                 this.updateUI();
                 this.setupCharts();
             }
+        });
+        
+        // Language toggle
+        document.getElementById('toggleLanguage')?.addEventListener('click', () => {
+            this.toggleLanguage();
         });
         
         // Search & filters
@@ -135,34 +368,51 @@ class ExpenseFlow {
         });
     }
     
+    updateCategoryOptions(type) {
+        const select = document.getElementById('transactionCategory');
+        const options = select.querySelectorAll('option');
+        const isIncome = type === 'income';
+        
+        // Show/hide optgroups based on type
+        select.querySelectorAll('optgroup').forEach(group => {
+            const label = group.label;
+            if ((isIncome && label === 'Expense') || (!isIncome && label === 'Income')) {
+                group.style.display = 'none';
+                group.querySelectorAll('option').forEach(opt => opt.disabled = true);
+            } else {
+                group.style.display = '';
+                group.querySelectorAll('option').forEach(opt => opt.disabled = false);
+            }
+        });
+        
+        // Reset selection
+        select.value = '';
+    }
+    
     // ==========================================
     // VIEW NAVIGATION
     // ==========================================
     switchView(view) {
         this.currentView = view;
         
-        // Update nav
         document.querySelectorAll('.nav-item').forEach(item => {
             item.classList.toggle('active', item.dataset.view === view);
         });
         
-        // Update sections
         document.querySelectorAll('.view-section').forEach(section => {
             section.classList.remove('active');
         });
         document.getElementById(`${view}View`)?.classList.add('active');
         
-        // Update header
         const titles = {
-            dashboard: { title: 'Dashboard', subtitle: 'Overview of your finances' },
-            transactions: { title: 'Transactions', subtitle: 'Manage your transactions' },
-            analytics: { title: 'Analytics', subtitle: 'Deep dive into your spending' }
+            dashboard: { title: 'navDashboard', subtitle: 'dashboardSubtitle' },
+            transactions: { title: 'navTransactions', subtitle: 'transactionsSubtitle' },
+            analytics: { title: 'navAnalytics', subtitle: 'analyticsSubtitle' }
         };
         const info = titles[view] || titles.dashboard;
-        document.getElementById('pageTitle').textContent = info.title;
-        document.getElementById('pageSubtitle').textContent = info.subtitle;
+        document.getElementById('pageTitle').textContent = this.getText(info.title);
+        document.getElementById('pageSubtitle').textContent = this.getText(info.subtitle);
         
-        // Refresh charts if switching to dashboard
         if (view === 'dashboard') {
             setTimeout(() => this.setupCharts(), 100);
         }
@@ -179,6 +429,7 @@ class ExpenseFlow {
         document.getElementById('transactionForm').reset();
         document.getElementById('transactionDate').value = new Date().toISOString().split('T')[0];
         document.querySelector('.type-btn[data-type="expense"]')?.click();
+        this.updateCategoryOptions('expense');
     }
     
     closeModal() {
@@ -266,13 +517,12 @@ class ExpenseFlow {
         const recent = this.transactions.slice(0, 5);
         
         if (recent.length === 0) {
-            container.innerHTML = '<p style="text-align: center; color: #9ca3af; padding: 40px 0;">No transactions yet.</p>';
+            container.innerHTML = `<p style="text-align: center; color: #9ca3af; padding: 40px 0;">${this.getText('noTransactions')}</p>`;
             return;
         }
         
         container.innerHTML = recent.map(t => this.createTransactionHTML(t)).join('');
         
-        // Attach delete events
         container.querySelectorAll('.delete-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 this.deleteTransaction(parseInt(btn.dataset.id));
@@ -301,7 +551,7 @@ class ExpenseFlow {
         }
         
         if (filtered.length === 0) {
-            container.innerHTML = '<p style="text-align: center; color: #9ca3af; padding: 40px 0;">No transactions found.</p>';
+            container.innerHTML = `<p style="text-align: center; color: #9ca3af; padding: 40px 0;">${this.getText('noTransactions')}</p>`;
             return;
         }
         
@@ -320,19 +570,11 @@ class ExpenseFlow {
         const amountClass = isIncome ? 'income' : 'expense';
         const sign = isIncome ? '+' : '-';
         
-        const categoryMap = {
-            food: '🍔 Food',
-            transport: '🚗 Transport',
-            entertainment: '🎬 Entertainment',
-            shopping: '🛍️ Shopping',
-            bills: '📄 Bills',
-            health: '💊 Health',
-            education: '📚 Education',
-            other: '📌 Other'
-        };
+        const categoryDisplay = this.getCategoryDisplay(transaction.category, transaction.type);
+        const categoryIcon = this.getCategoryIcon(transaction.category);
         
         const date = new Date(transaction.date);
-        const formattedDate = date.toLocaleDateString('en-US', { 
+        const formattedDate = date.toLocaleDateString(this.currentLanguage === 'fa' ? 'fa-IR' : 'en-US', { 
             month: 'short', 
             day: 'numeric',
             year: 'numeric'
@@ -348,7 +590,7 @@ class ExpenseFlow {
                         <div class="transaction-description">${this.escapeHtml(transaction.description)}</div>
                         <div class="transaction-meta">
                             <span>${formattedDate}</span>
-                            <span class="transaction-category">${categoryMap[transaction.category] || transaction.category}</span>
+                            <span class="transaction-category">${categoryIcon} ${categoryDisplay}</span>
                         </div>
                     </div>
                 </div>
@@ -383,20 +625,9 @@ class ExpenseFlow {
         const ctx = canvas.getContext('2d');
         const expenses = this.transactions.filter(t => t.type === 'expense');
         
-        const categoryMap = {
-            food: 'Food',
-            transport: 'Transport',
-            entertainment: 'Entertainment',
-            shopping: 'Shopping',
-            bills: 'Bills',
-            health: 'Health',
-            education: 'Education',
-            other: 'Other'
-        };
-        
         const categories = {};
         expenses.forEach(t => {
-            const cat = categoryMap[t.category] || t.category;
+            const cat = this.getCategoryDisplay(t.category, 'expense');
             categories[cat] = (categories[cat] || 0) + t.amount;
         });
         
@@ -457,7 +688,7 @@ class ExpenseFlow {
                             padding: 12,
                             font: {
                                 size: 12,
-                                family: 'Inter'
+                                family: this.currentLanguage === 'fa' ? 'Vazirmatn' : 'Inter'
                             }
                         }
                     }
@@ -473,7 +704,6 @@ class ExpenseFlow {
         
         const ctx = canvas.getContext('2d');
         
-        // Group by date (last 7 days)
         const today = new Date();
         const dates = [];
         const incomeData = [];
@@ -498,7 +728,7 @@ class ExpenseFlow {
         
         const labels = dates.map(d => {
             const date = new Date(d);
-            return date.toLocaleDateString('en-US', { weekday: 'short' });
+            return date.toLocaleDateString(this.currentLanguage === 'fa' ? 'fa-IR' : 'en-US', { weekday: 'short' });
         });
         
         if (this.incomeExpenseChart) {
@@ -511,14 +741,14 @@ class ExpenseFlow {
                 labels: labels,
                 datasets: [
                     {
-                        label: 'Income',
+                        label: this.getText('income'),
                         data: incomeData,
                         backgroundColor: '#10b981',
                         borderRadius: 6,
                         barPercentage: 0.35
                     },
                     {
-                        label: 'Expenses',
+                        label: this.getText('expense'),
                         data: expenseData,
                         backgroundColor: '#ef4444',
                         borderRadius: 6,
@@ -538,7 +768,7 @@ class ExpenseFlow {
                             padding: 16,
                             font: {
                                 size: 12,
-                                family: 'Inter'
+                                family: this.currentLanguage === 'fa' ? 'Vazirmatn' : 'Inter'
                             }
                         }
                     }
@@ -575,7 +805,6 @@ class ExpenseFlow {
             .reduce((sum, t) => sum + t.amount, 0);
         const net = totalIncome - totalExpense;
         
-        // Average daily expense (last 30 days)
         const thirtyDaysAgo = new Date();
         thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
         const thirtyDaysStr = thirtyDaysAgo.toISOString().split('T')[0];
@@ -590,7 +819,6 @@ class ExpenseFlow {
         document.getElementById('analyticsNet').textContent = `$${net.toFixed(2)}`;
         document.getElementById('analyticsDaily').textContent = `$${dailyAvg.toFixed(2)}`;
         
-        // Top categories
         this.renderTopCategories();
     }
     
@@ -598,20 +826,9 @@ class ExpenseFlow {
         const container = document.getElementById('topCategoriesList');
         const expenses = this.transactions.filter(t => t.type === 'expense');
         
-        const categoryMap = {
-            food: 'Food',
-            transport: 'Transport',
-            entertainment: 'Entertainment',
-            shopping: 'Shopping',
-            bills: 'Bills',
-            health: 'Health',
-            education: 'Education',
-            other: 'Other'
-        };
-        
         const categories = {};
         expenses.forEach(t => {
-            const cat = categoryMap[t.category] || t.category;
+            const cat = this.getCategoryDisplay(t.category, 'expense');
             categories[cat] = (categories[cat] || 0) + t.amount;
         });
         
@@ -622,7 +839,7 @@ class ExpenseFlow {
         const total = sorted.reduce((sum, [, amount]) => sum + amount, 0);
         
         if (sorted.length === 0) {
-            container.innerHTML = '<p style="color: #9ca3af;">No expense data available</p>';
+            container.innerHTML = `<p style="color: #9ca3af;">${this.getText('noData')}</p>`;
             return;
         }
         
@@ -657,6 +874,5 @@ class ExpenseFlow {
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     const app = new ExpenseFlow();
-    // Make it accessible for debugging
     window.expenseFlow = app;
 });

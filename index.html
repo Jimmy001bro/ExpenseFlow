@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -24,28 +24,32 @@
         <aside class="sidebar">
             <div class="sidebar-brand">
                 <i class="fas fa-wallet"></i>
-                <span>ExpenseFlow</span>
+                <span data-i18n="appName">ExpenseFlow</span>
             </div>
             
             <nav class="sidebar-nav">
                 <a href="#" class="nav-item active" data-view="dashboard">
                     <i class="fas fa-chart-pie"></i>
-                    <span>Dashboard</span>
+                    <span data-i18n="navDashboard">Dashboard</span>
                 </a>
                 <a href="#" class="nav-item" data-view="transactions">
                     <i class="fas fa-list-ul"></i>
-                    <span>Transactions</span>
+                    <span data-i18n="navTransactions">Transactions</span>
                 </a>
                 <a href="#" class="nav-item" data-view="analytics">
                     <i class="fas fa-chart-line"></i>
-                    <span>Analytics</span>
+                    <span data-i18n="navAnalytics">Analytics</span>
                 </a>
             </nav>
             
             <div class="sidebar-footer">
+                <button class="btn btn-language" id="toggleLanguage">
+                    <i class="fas fa-globe"></i>
+                    <span>فارسی / EN</span>
+                </button>
                 <button class="btn btn-danger" id="clearAllData">
                     <i class="fas fa-trash-alt"></i>
-                    <span>Clear All Data</span>
+                    <span data-i18n="clearData">Clear All Data</span>
                 </button>
             </div>
         </aside>
@@ -55,13 +59,13 @@
             <!-- Header -->
             <header class="main-header">
                 <div class="header-left">
-                    <h1 id="pageTitle">Dashboard</h1>
-                    <p id="pageSubtitle">Overview of your finances</p>
+                    <h1 id="pageTitle" data-i18n="dashboardTitle">Dashboard</h1>
+                    <p id="pageSubtitle" data-i18n="dashboardSubtitle">Overview of your finances</p>
                 </div>
                 <div class="header-right">
                     <button class="btn btn-primary" id="openAddModal">
                         <i class="fas fa-plus"></i>
-                        <span>Add Transaction</span>
+                        <span data-i18n="addTransaction">Add Transaction</span>
                     </button>
                 </div>
             </header>
@@ -75,7 +79,7 @@
                             <i class="fas fa-wallet"></i>
                         </div>
                         <div class="stat-info">
-                            <span class="stat-label">Balance</span>
+                            <span class="stat-label" data-i18n="balance">Balance</span>
                             <span class="stat-value" id="balanceDisplay">$0.00</span>
                         </div>
                     </div>
@@ -84,7 +88,7 @@
                             <i class="fas fa-arrow-up"></i>
                         </div>
                         <div class="stat-info">
-                            <span class="stat-label">Income</span>
+                            <span class="stat-label" data-i18n="totalIncome">Income</span>
                             <span class="stat-value" id="incomeDisplay">$0.00</span>
                         </div>
                     </div>
@@ -93,7 +97,7 @@
                             <i class="fas fa-arrow-down"></i>
                         </div>
                         <div class="stat-info">
-                            <span class="stat-label">Expenses</span>
+                            <span class="stat-label" data-i18n="totalExpenses">Expenses</span>
                             <span class="stat-value" id="expenseDisplay">$0.00</span>
                         </div>
                     </div>
@@ -102,7 +106,7 @@
                             <i class="fas fa-percent"></i>
                         </div>
                         <div class="stat-info">
-                            <span class="stat-label">Savings Rate</span>
+                            <span class="stat-label" data-i18n="savingsRate">Savings Rate</span>
                             <span class="stat-value" id="savingsRateDisplay">0%</span>
                         </div>
                     </div>
@@ -111,13 +115,13 @@
                 <!-- Charts Row -->
                 <div class="charts-grid">
                     <div class="chart-card">
-                        <h3>Spending by Category</h3>
+                        <h3 data-i18n="spendingByCategory">Spending by Category</h3>
                         <div class="chart-container">
                             <canvas id="categoryChart"></canvas>
                         </div>
                     </div>
                     <div class="chart-card">
-                        <h3>Income vs Expenses</h3>
+                        <h3 data-i18n="incomeVsExpenses">Income vs Expenses</h3>
                         <div class="chart-container">
                             <canvas id="incomeExpenseChart"></canvas>
                         </div>
@@ -127,11 +131,11 @@
                 <!-- Recent Transactions -->
                 <div class="recent-transactions">
                     <div class="section-header">
-                        <h3>Recent Transactions</h3>
-                        <a href="#" class="view-all" data-view="transactions">View All</a>
+                        <h3 data-i18n="recentTransactions">Recent Transactions</h3>
+                        <a href="#" class="view-all" data-view="transactions" data-i18n="viewAll">View All</a>
                     </div>
                     <div class="transaction-list" id="recentTransactionList">
-                        <p style="text-align: center; color: #9ca3af; padding: 40px 0;">
+                        <p style="text-align: center; color: #9ca3af; padding: 40px 0;" data-i18n="noTransactions">
                             No transactions yet. Add your first one!
                         </p>
                     </div>
@@ -143,30 +147,41 @@
                 <div class="transactions-controls">
                     <div class="search-bar">
                         <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="Search transactions..." />
+                        <input type="text" id="searchInput" data-i18n-placeholder="searchTransactions" placeholder="Search transactions..." />
                     </div>
                     <div class="filter-group">
                         <select id="categoryFilter">
-                            <option value="all">All Categories</option>
-                            <option value="food">Food</option>
-                            <option value="transport">Transport</option>
-                            <option value="entertainment">Entertainment</option>
-                            <option value="shopping">Shopping</option>
-                            <option value="bills">Bills</option>
-                            <option value="health">Health</option>
-                            <option value="education">Education</option>
-                            <option value="other">Other</option>
+                            <option value="all" data-i18n="allCategories">All Categories</option>
+                            <!-- Income Categories -->
+                            <optgroup label="Income" data-i18n="incomeCategories">
+                                <option value="salary">💼 Salary</option>
+                                <option value="freelance">💻 Freelance</option>
+                                <option value="investment">📈 Investment</option>
+                                <option value="gift">🎁 Gift</option>
+                                <option value="other_income">📌 Other Income</option>
+                            </optgroup>
+                            <!-- Expense Categories -->
+                            <optgroup label="Expenses" data-i18n="expenseCategories">
+                                <option value="food">🍔 Food</option>
+                                <option value="transport">🚗 Transport</option>
+                                <option value="entertainment">🎬 Entertainment</option>
+                                <option value="shopping">🛍️ Shopping</option>
+                                <option value="bills">📄 Bills</option>
+                                <option value="health">💊 Health</option>
+                                <option value="education">📚 Education</option>
+                                <option value="other_expense">📌 Other Expense</option>
+                            </optgroup>
                         </select>
                         <select id="typeFilter">
-                            <option value="all">All Types</option>
-                            <option value="income">Income</option>
-                            <option value="expense">Expense</option>
+                            <option value="all" data-i18n="allTypes">All Types</option>
+                            <option value="income" data-i18n="income">Income</option>
+                            <option value="expense" data-i18n="expense">Expense</option>
                         </select>
                     </div>
                 </div>
                 
                 <div class="transaction-list full-list" id="fullTransactionList">
-                    <p style="text-align: center; color: #9ca3af; padding: 40px 0;">
+                    <p style="text-align: center; color: #9ca3af; padding: 40px 0;" data-i18n="noTransactions">
                         No transactions yet.
                     </p>
                 </div>
@@ -176,30 +191,30 @@
             <section id="analyticsView" class="view-section">
                 <div class="analytics-grid">
                     <div class="analytics-card">
-                        <h3>Monthly Summary</h3>
+                        <h3 data-i18n="monthlySummary">Monthly Summary</h3>
                         <div class="analytics-stats">
                             <div class="analytics-stat">
-                                <span class="label">Total Income</span>
+                                <span class="label" data-i18n="totalIncome">Total Income</span>
                                 <span class="value income" id="analyticsIncome">$0.00</span>
                             </div>
                             <div class="analytics-stat">
-                                <span class="label">Total Expenses</span>
+                                <span class="label" data-i18n="totalExpenses">Total Expenses</span>
                                 <span class="value expense" id="analyticsExpense">$0.00</span>
                             </div>
                             <div class="analytics-stat">
-                                <span class="label">Net</span>
+                                <span class="label" data-i18n="netSavings">Net Savings</span>
                                 <span class="value" id="analyticsNet">$0.00</span>
                             </div>
                             <div class="analytics-stat">
-                                <span class="label">Average Daily</span>
+                                <span class="label" data-i18n="averageDaily">Average Daily</span>
                                 <span class="value" id="analyticsDaily">$0.00</span>
                             </div>
                         </div>
                     </div>
                     <div class="analytics-card">
-                        <h3>Top Spending Categories</h3>
+                        <h3 data-i18n="topSpending">Top Spending Categories</h3>
                         <div id="topCategoriesList">
-                            <p style="color: #9ca3af;">No data available</p>
+                            <p style="color: #9ca3af;" data-i18n="noData">No data available</p>
                         </div>
                     </div>
                 </div>
@@ -211,55 +226,66 @@
     <div class="modal" id="addModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Add Transaction</h2>
+                <h2 data-i18n="addTransaction">Add Transaction</h2>
                 <button class="modal-close" id="closeModal">&times;</button>
             </div>
             <form id="transactionForm">
                 <div class="form-group">
-                    <label for="transactionType">Type</label>
+                    <label data-i18n="type">Type</label>
                     <div class="type-toggle">
                         <button type="button" class="type-btn active" data-type="expense">
-                            <i class="fas fa-arrow-down"></i> Expense
+                            <i class="fas fa-arrow-down"></i> <span data-i18n="expense">Expense</span>
                         </button>
                         <button type="button" class="type-btn" data-type="income">
-                            <i class="fas fa-arrow-up"></i> Income
+                            <i class="fas fa-arrow-up"></i> <span data-i18n="income">Income</span>
                         </button>
                     </div>
                     <input type="hidden" id="transactionType" value="expense" />
                 </div>
                 
                 <div class="form-group">
-                    <label for="transactionDescription">Description</label>
-                    <input type="text" id="transactionDescription" placeholder="e.g., Coffee shop" required />
+                    <label for="transactionDescription" data-i18n="description">Description</label>
+                    <input type="text" id="transactionDescription" data-i18n-placeholder="enterDescription" placeholder="e.g., Coffee shop" required />
                 </div>
                 
                 <div class="form-group">
-                    <label for="transactionAmount">Amount</label>
+                    <label for="transactionAmount" data-i18n="amount">Amount</label>
                     <input type="number" id="transactionAmount" placeholder="0.00" step="0.01" min="0.01" required />
                 </div>
                 
                 <div class="form-group">
-                    <label for="transactionCategory">Category</label>
+                    <label for="transactionCategory" data-i18n="category">Category</label>
                     <select id="transactionCategory" required>
-                        <option value="">Select a category</option>
-                        <option value="food">🍔 Food</option>
-                        <option value="transport">🚗 Transport</option>
-                        <option value="entertainment">🎬 Entertainment</option>
-                        <option value="shopping">🛍️ Shopping</option>
-                        <option value="bills">📄 Bills</option>
-                        <option value="health">💊 Health</option>
-                        <option value="education">📚 Education</option>
-                        <option value="other">📌 Other</option>
+                        <option value="" data-i18n="selectCategory">Select a category</option>
+                        <!-- Income Categories -->
+                        <optgroup label="Income" data-i18n="incomeCategories">
+                            <option value="salary">💼 Salary</option>
+                            <option value="freelance">💻 Freelance</option>
+                            <option value="investment">📈 Investment</option>
+                            <option value="gift">🎁 Gift</option>
+                            <option value="other_income">📌 Other Income</option>
+                        </optgroup>
+                        <!-- Expense Categories -->
+                        <optgroup label="Expenses" data-i18n="expenseCategories">
+                            <option value="food">🍔 Food</option>
+                            <option value="transport">🚗 Transport</option>
+                            <option value="entertainment">🎬 Entertainment</option>
+                            <option value="shopping">🛍️ Shopping</option>
+                            <option value="bills">📄 Bills</option>
+                            <option value="health">💊 Health</option>
+                            <option value="education">📚 Education</option>
+                            <option value="other_expense">📌 Other Expense</option>
+                        </optgroup>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="transactionDate">Date</label>
+                    <label for="transactionDate" data-i18n="date">Date</label>
                     <input type="date" id="transactionDate" required />
                 </div>
                 
                 <button type="submit" class="btn btn-primary btn-full">
-                    <i class="fas fa-plus"></i> Add Transaction
+                    <i class="fas fa-plus"></i> <span data-i18n="addTransaction">Add Transaction</span>
                 </button>
             </form>
         </div>

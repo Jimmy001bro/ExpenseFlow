@@ -40,14 +40,25 @@
     --radius: 12px;
     --radius-sm: 8px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-family-fa: 'Vazirmatn', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    --dir: ltr;
+    --text-align: left;
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-family);
     background: var(--gray-50);
     color: var(--gray-900);
     line-height: 1.6;
     min-height: 100vh;
+}
+
+body.rtl {
+    --dir: rtl;
+    --text-align: right;
+    font-family: var(--font-family-fa);
 }
 
 /* ============================================
@@ -90,6 +101,11 @@ body {
     top: 0;
     height: 100vh;
     flex-shrink: 0;
+}
+
+body.rtl .sidebar {
+    border-right: none;
+    border-left: 1px solid var(--gray-200);
 }
 
 .sidebar-brand {
@@ -145,6 +161,9 @@ body {
 .sidebar-footer {
     padding-top: 16px;
     border-top: 1px solid var(--gray-200);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 /* ============================================
@@ -163,6 +182,7 @@ body {
     cursor: pointer;
     transition: var(--transition);
     text-decoration: none;
+    justify-content: center;
 }
 
 .btn-primary {
@@ -185,6 +205,16 @@ body {
     background: #dc2626;
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
+}
+
+.btn-language {
+    background: var(--gray-100);
+    color: var(--gray-700);
+    width: 100%;
+    justify-content: center;
+}
+.btn-language:hover {
+    background: var(--gray-200);
 }
 
 .btn-success {
@@ -225,6 +255,25 @@ body {
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
+}
+
+body.rtl .main-content {
+    direction: rtl;
+    text-align: right;
+}
+
+body.rtl .header-left h1,
+body.rtl .header-left p,
+body.rtl .stat-label,
+body.rtl .stat-value,
+body.rtl .chart-card h3,
+body.rtl .section-header h3,
+body.rtl .transaction-description,
+body.rtl .transaction-meta,
+body.rtl .analytics-card h3,
+body.rtl .analytics-stat .label,
+body.rtl .analytics-stat .value {
+    text-align: right;
 }
 
 /* ============================================
@@ -403,11 +452,19 @@ body {
     background: var(--gray-50);
 }
 
+body.rtl .transaction-item {
+    flex-direction: row-reverse;
+}
+
 .transaction-left {
     display: flex;
     align-items: center;
     gap: 14px;
     flex: 1;
+}
+
+body.rtl .transaction-left {
+    flex-direction: row-reverse;
 }
 
 .transaction-icon {
@@ -443,6 +500,11 @@ body {
     gap: 12px;
     align-items: center;
 }
+
+body.rtl .transaction-meta {
+    flex-direction: row-reverse;
+}
+
 .transaction-category {
     background: var(--gray-100);
     padding: 1px 10px;
@@ -455,6 +517,11 @@ body {
     align-items: center;
     gap: 16px;
 }
+
+body.rtl .transaction-right {
+    flex-direction: row-reverse;
+}
+
 .transaction-amount {
     font-weight: 600;
     font-size: 15px;
@@ -489,6 +556,10 @@ body {
     margin-bottom: 24px;
     flex-wrap: wrap;
     align-items: center;
+}
+
+body.rtl .transactions-controls {
+    flex-direction: row-reverse;
 }
 
 .search-bar {
@@ -786,6 +857,9 @@ body {
         flex-wrap: wrap;
         gap: 8px;
     }
+    body.rtl .sidebar {
+        border-left: none;
+    }
     .sidebar-brand {
         padding: 0;
         font-size: 18px;
@@ -799,6 +873,9 @@ body {
         flex: 1;
         justify-content: flex-end;
     }
+    body.rtl .sidebar-nav {
+        flex-direction: row-reverse;
+    }
     .nav-item span {
         display: none;
     }
@@ -811,6 +888,18 @@ body {
         font-size: 18px;
     }
     .sidebar-footer {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        border: none;
+        gap: 4px;
+    }
+    .sidebar-footer .btn {
+        padding: 6px 10px;
+        font-size: 12px;
+        width: auto;
+    }
+    .sidebar-footer .btn span {
         display: none;
     }
     
@@ -864,6 +953,10 @@ body {
         width: 100%;
         justify-content: space-between;
         padding-left: 54px;
+    }
+    body.rtl .transaction-right {
+        padding-left: 0;
+        padding-right: 54px;
     }
     
     .modal-content {
