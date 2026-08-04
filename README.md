@@ -17,7 +17,20 @@
 - **Analytics** - Monthly summary and top spending categories
 - **Local Storage** - All data persists after browser refresh
 - **Responsive** - Works on desktop, tablet, and mobile
+## Screenshot
+![ExpenseFlow Dashboard]<img width="1360" height="627" alt="Screenshot 2026-08-04 1" src="https://github.com/user-attachments/assets/c09c33d3-3272-4b18-a579-9ea8d5c84122" />
+<img width="1365" height="610" alt="Screenshot 2026-08-04 2" src="https://github.com/user-attachments/assets/28e4d940-2ad8-4eb8-a5fd-d82772f66d92" />
+<img width="1365" height="620" alt="Screenshot 2026-08-04 3" src="https://github.com/user-attachments/assets/39766b05-86c2-4216-a788-e1479f249879" />
+<img width="1359" height="614" alt="Screenshot 2026-08-04 4" src="https://github.com/user-attachments/assets/46ddd837-6264-4213-a3ed-b5314d68b52e" />
 
+## 🚀 Quick Start
+
+1. Clone the repository:
+git clone https://github.com/Jimmy001bro/expenseflow.git
+
+    Open index.html in your browser
+
+    Start tracking your finances!
 
 ## 📦 Project Structure
 
