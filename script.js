@@ -1,5 +1,5 @@
 // ============================================
-// EXPENSE FLOW 2.0 - Main Application
+// EXPENSE FLOW 2.2 - Main Application
 // ============================================
 
 class ExpenseFlow {
@@ -10,6 +10,7 @@ class ExpenseFlow {
         this.incomeExpenseChart = null;
         this.currentLanguage = this.getStoredLanguage() || 'en';
         this.translations = {};
+        this.currencySymbol = '$';
         
         this.init();
     }
@@ -58,6 +59,7 @@ class ExpenseFlow {
                 type: 'Type',
                 description: 'Description',
                 amount: 'Amount',
+                currency: 'Currency',
                 category: 'Category',
                 date: 'Date',
                 enterDescription: 'e.g., Coffee shop',
@@ -109,6 +111,7 @@ class ExpenseFlow {
                 type: 'نوع',
                 description: 'توضیحات',
                 amount: 'مبلغ',
+                currency: 'واحد پول',
                 category: 'دسته‌بندی',
                 date: 'تاریخ',
                 enterDescription: 'مثال: خرید از فروشگاه',
@@ -150,7 +153,6 @@ class ExpenseFlow {
             el.placeholder = this.getText(key);
         });
         
-        // Update document direction
         if (this.currentLanguage === 'fa') {
             document.body.classList.add('rtl');
             document.documentElement.lang = 'fa';
@@ -161,7 +163,6 @@ class ExpenseFlow {
             document.documentElement.dir = 'ltr';
         }
         
-        // Update chart legend if charts exist
         this.setupCharts();
     }
     
@@ -221,26 +222,26 @@ class ExpenseFlow {
         };
         
         return [
-            { id: Date.now() + 1, type: 'income', description: 'Salary - TechCorp Inc.', amount: 4850.00, category: 'salary', date: getDate(0) },
-            { id: Date.now() + 2, type: 'expense', description: 'Whole Foods Market', amount: 234.67, category: 'food', date: getDate(1) },
-            { id: Date.now() + 3, type: 'expense', description: 'Uber Ride to Airport', amount: 42.50, category: 'transport', date: getDate(1) },
-            { id: Date.now() + 4, type: 'expense', description: 'Netflix Subscription', amount: 15.99, category: 'entertainment', date: getDate(2) },
-            { id: Date.now() + 5, type: 'expense', description: 'Apple AirPods Pro', amount: 249.00, category: 'shopping', date: getDate(3) },
-            { id: Date.now() + 6, type: 'income', description: 'Freelance Website Project', amount: 750.00, category: 'freelance', date: getDate(4) },
-            { id: Date.now() + 7, type: 'expense', description: 'Electricity Bill - PGE', amount: 134.28, category: 'bills', date: getDate(4) },
-            { id: Date.now() + 8, type: 'expense', description: 'Gym Membership - FitnessFirst', amount: 89.99, category: 'health', date: getDate(5) },
-            { id: Date.now() + 9, type: 'expense', description: 'Amazon - Home Supplies', amount: 76.43, category: 'shopping', date: getDate(6) },
-            { id: Date.now() + 10, type: 'expense', description: 'Pizza Night - Domino\'s', amount: 32.50, category: 'food', date: getDate(7) },
-            { id: Date.now() + 11, type: 'income', description: 'Dividend Payment - VTI', amount: 185.40, category: 'investment', date: getDate(8) },
-            { id: Date.now() + 12, type: 'expense', description: 'Spotify Premium', amount: 11.99, category: 'entertainment', date: getDate(9) },
-            { id: Date.now() + 13, type: 'expense', description: 'Gas - Shell Station', amount: 54.20, category: 'transport', date: getDate(10) },
-            { id: Date.now() + 14, type: 'expense', description: 'Udemy Course - JavaScript', amount: 89.99, category: 'education', date: getDate(11) },
-            { id: Date.now() + 15, type: 'income', description: 'Bonus - Performance Q4', amount: 1200.00, category: 'salary', date: getDate(12) },
-            { id: Date.now() + 16, type: 'expense', description: 'Internet Bill - Comcast', amount: 79.99, category: 'bills', date: getDate(13) },
-            { id: Date.now() + 17, type: 'expense', description: 'Starbucks - Weekly Coffee', amount: 18.75, category: 'food', date: getDate(14) },
-            { id: Date.now() + 18, type: 'expense', description: 'New Running Shoes - Nike', amount: 129.99, category: 'shopping', date: getDate(15) },
-            { id: Date.now() + 19, type: 'expense', description: 'Dentist Appointment', amount: 165.00, category: 'health', date: getDate(16) },
-            { id: Date.now() + 20, type: 'income', description: 'Birthday Gift from Family', amount: 200.00, category: 'gift', date: getDate(17) }
+            { id: Date.now() + 1, type: 'income', description: 'Salary - TechCorp Inc.', amount: 4850.00, category: 'salary', currency: '$', date: getDate(0) },
+            { id: Date.now() + 2, type: 'expense', description: 'Whole Foods Market', amount: 234.67, category: 'food', currency: '$', date: getDate(1) },
+            { id: Date.now() + 3, type: 'expense', description: 'Uber Ride to Airport', amount: 42.50, category: 'transport', currency: '$', date: getDate(1) },
+            { id: Date.now() + 4, type: 'expense', description: 'Netflix Subscription', amount: 15.99, category: 'entertainment', currency: '$', date: getDate(2) },
+            { id: Date.now() + 5, type: 'expense', description: 'Apple AirPods Pro', amount: 249.00, category: 'shopping', currency: '$', date: getDate(3) },
+            { id: Date.now() + 6, type: 'income', description: 'Freelance Website Project', amount: 750.00, category: 'freelance', currency: '€', date: getDate(4) },
+            { id: Date.now() + 7, type: 'expense', description: 'Electricity Bill - PGE', amount: 134.28, category: 'bills', currency: '$', date: getDate(4) },
+            { id: Date.now() + 8, type: 'expense', description: 'Gym Membership - FitnessFirst', amount: 89.99, category: 'health', currency: '$', date: getDate(5) },
+            { id: Date.now() + 9, type: 'expense', description: 'Amazon - Home Supplies', amount: 76.43, category: 'shopping', currency: '$', date: getDate(6) },
+            { id: Date.now() + 10, type: 'expense', description: 'Pizza Night - Domino\'s', amount: 32.50, category: 'food', currency: '€', date: getDate(7) },
+            { id: Date.now() + 11, type: 'income', description: 'Dividend Payment - VTI', amount: 185.40, category: 'investment', currency: '$', date: getDate(8) },
+            { id: Date.now() + 12, type: 'expense', description: 'Spotify Premium', amount: 11.99, category: 'entertainment', currency: '$', date: getDate(9) },
+            { id: Date.now() + 13, type: 'expense', description: 'Gas - Shell Station', amount: 54.20, category: 'transport', currency: '€', date: getDate(10) },
+            { id: Date.now() + 14, type: 'expense', description: 'Udemy Course - JavaScript', amount: 89.99, category: 'education', currency: '$', date: getDate(11) },
+            { id: Date.now() + 15, type: 'income', description: 'Bonus - Performance Q4', amount: 1200.00, category: 'salary', currency: '$', date: getDate(12) },
+            { id: Date.now() + 16, type: 'expense', description: 'Internet Bill - Comcast', amount: 79.99, category: 'bills', currency: '$', date: getDate(13) },
+            { id: Date.now() + 17, type: 'expense', description: 'Starbucks - Weekly Coffee', amount: 18.75, category: 'food', currency: '$', date: getDate(14) },
+            { id: Date.now() + 18, type: 'expense', description: 'New Running Shoes - Nike', amount: 129.99, category: 'shopping', currency: '$', date: getDate(15) },
+            { id: Date.now() + 19, type: 'expense', description: 'Dentist Appointment', amount: 165.00, category: 'health', currency: '$', date: getDate(16) },
+            { id: Date.now() + 20, type: 'income', description: 'Birthday Gift from Family', amount: 200.00, category: 'gift', currency: 'ریال', date: getDate(17) }
         ];
     }
     
@@ -321,13 +322,18 @@ class ExpenseFlow {
             if (e.target === e.currentTarget) this.closeModal();
         });
         
-        // Type toggle
+        // Type toggle - FIXED
         document.querySelectorAll('.type-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', (e) => {
+                // Remove active from all
                 document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+                // Add active to clicked
                 btn.classList.add('active');
-                document.getElementById('transactionType').value = btn.dataset.type;
-                this.updateCategoryOptions(btn.dataset.type);
+                // Set the type
+                const type = btn.dataset.type;
+                document.getElementById('transactionType').value = type;
+                // Update categories
+                this.updateCategoryOptions(type);
             });
         });
         
@@ -368,24 +374,31 @@ class ExpenseFlow {
         });
     }
     
+    // ==========================================
+    // CATEGORY UPDATE - FIXED
+    // ==========================================
     updateCategoryOptions(type) {
         const select = document.getElementById('transactionCategory');
-        const options = select.querySelectorAll('option');
         const isIncome = type === 'income';
         
-        // Show/hide optgroups based on type
-        select.querySelectorAll('optgroup').forEach(group => {
-            const label = group.label;
-            if ((isIncome && label === 'Expense') || (!isIncome && label === 'Income')) {
-                group.style.display = 'none';
-                group.querySelectorAll('option').forEach(opt => opt.disabled = true);
-            } else {
+        // Get all optgroups
+        const optgroups = select.querySelectorAll('optgroup');
+        
+        optgroups.forEach(group => {
+            const label = group.getAttribute('label');
+            // Check if this is an Income or Expense group
+            if ((isIncome && label === 'Income') || (!isIncome && label === 'Expenses')) {
+                // Show this group
                 group.style.display = '';
                 group.querySelectorAll('option').forEach(opt => opt.disabled = false);
+            } else {
+                // Hide this group
+                group.style.display = 'none';
+                group.querySelectorAll('option').forEach(opt => opt.disabled = true);
             }
         });
         
-        // Reset selection
+        // Reset the selected value
         select.value = '';
     }
     
@@ -428,8 +441,13 @@ class ExpenseFlow {
         document.getElementById('addModal').classList.add('open');
         document.getElementById('transactionForm').reset();
         document.getElementById('transactionDate').value = new Date().toISOString().split('T')[0];
-        document.querySelector('.type-btn[data-type="expense"]')?.click();
-        this.updateCategoryOptions('expense');
+        document.getElementById('transactionCurrency').value = '$';
+        
+        // Set default to Expense and update UI
+        const expenseBtn = document.querySelector('.type-btn[data-type="expense"]');
+        if (expenseBtn) {
+            expenseBtn.click();
+        }
     }
     
     closeModal() {
@@ -450,6 +468,7 @@ class ExpenseFlow {
         const type = document.getElementById('transactionType').value;
         const description = document.getElementById('transactionDescription').value.trim();
         const amount = parseFloat(document.getElementById('transactionAmount').value);
+        const currency = document.getElementById('transactionCurrency').value;
         const category = document.getElementById('transactionCategory').value;
         const date = document.getElementById('transactionDate').value;
         
@@ -463,6 +482,7 @@ class ExpenseFlow {
             type,
             description,
             amount,
+            currency,
             category,
             date
         };
@@ -506,10 +526,29 @@ class ExpenseFlow {
         const balance = totalIncome - totalExpense;
         const savingsRate = totalIncome > 0 ? ((totalIncome - totalExpense) / totalIncome * 100) : 0;
         
-        document.getElementById('balanceDisplay').textContent = `$${balance.toFixed(2)}`;
-        document.getElementById('incomeDisplay').textContent = `$${totalIncome.toFixed(2)}`;
-        document.getElementById('expenseDisplay').textContent = `$${totalExpense.toFixed(2)}`;
+        const currency = this.getDefaultCurrency();
+        document.getElementById('balanceDisplay').textContent = `${currency}${balance.toFixed(2)}`;
+        document.getElementById('incomeDisplay').textContent = `${currency}${totalIncome.toFixed(2)}`;
+        document.getElementById('expenseDisplay').textContent = `${currency}${totalExpense.toFixed(2)}`;
         document.getElementById('savingsRateDisplay').textContent = `${savingsRate.toFixed(0)}%`;
+    }
+    
+    getDefaultCurrency() {
+        if (this.transactions.length === 0) return '$';
+        const currencyCount = {};
+        this.transactions.forEach(t => {
+            const c = t.currency || '$';
+            currencyCount[c] = (currencyCount[c] || 0) + 1;
+        });
+        let maxCount = 0;
+        let defaultCurrency = '$';
+        for (const [cur, count] of Object.entries(currencyCount)) {
+            if (count > maxCount) {
+                maxCount = count;
+                defaultCurrency = cur;
+            }
+        }
+        return defaultCurrency;
     }
     
     renderRecentTransactions() {
@@ -572,6 +611,7 @@ class ExpenseFlow {
         
         const categoryDisplay = this.getCategoryDisplay(transaction.category, transaction.type);
         const categoryIcon = this.getCategoryIcon(transaction.category);
+        const currency = transaction.currency || '$';
         
         const date = new Date(transaction.date);
         const formattedDate = date.toLocaleDateString(this.currentLanguage === 'fa' ? 'fa-IR' : 'en-US', { 
@@ -591,11 +631,12 @@ class ExpenseFlow {
                         <div class="transaction-meta">
                             <span>${formattedDate}</span>
                             <span class="transaction-category">${categoryIcon} ${categoryDisplay}</span>
+                            <span class="transaction-category">${currency}</span>
                         </div>
                     </div>
                 </div>
                 <div class="transaction-right">
-                    <span class="transaction-amount ${amountClass}">${sign}$${transaction.amount.toFixed(2)}</span>
+                    <span class="transaction-amount ${amountClass}">${sign}${currency}${transaction.amount.toFixed(2)}</span>
                     <button class="delete-btn" data-id="${transaction.id}">
                         <i class="fas fa-times"></i>
                     </button>
@@ -780,7 +821,7 @@ class ExpenseFlow {
                             color: 'rgba(0,0,0,0.05)'
                         },
                         ticks: {
-                            callback: (value) => `$${value}`
+                            callback: (value) => `${this.getDefaultCurrency()}${value}`
                         }
                     },
                     x: {
@@ -814,10 +855,11 @@ class ExpenseFlow {
             .reduce((sum, t) => sum + t.amount, 0);
         const dailyAvg = recentExpenses / 30;
         
-        document.getElementById('analyticsIncome').textContent = `$${totalIncome.toFixed(2)}`;
-        document.getElementById('analyticsExpense').textContent = `$${totalExpense.toFixed(2)}`;
-        document.getElementById('analyticsNet').textContent = `$${net.toFixed(2)}`;
-        document.getElementById('analyticsDaily').textContent = `$${dailyAvg.toFixed(2)}`;
+        const currency = this.getDefaultCurrency();
+        document.getElementById('analyticsIncome').textContent = `${currency}${totalIncome.toFixed(2)}`;
+        document.getElementById('analyticsExpense').textContent = `${currency}${totalExpense.toFixed(2)}`;
+        document.getElementById('analyticsNet').textContent = `${currency}${net.toFixed(2)}`;
+        document.getElementById('analyticsDaily').textContent = `${currency}${dailyAvg.toFixed(2)}`;
         
         this.renderTopCategories();
     }
@@ -844,6 +886,7 @@ class ExpenseFlow {
         }
         
         const colors = ['#6366f1', '#8b5cf6', '#ec4899', '#f43f5e', '#f59e0b'];
+        const currency = this.getDefaultCurrency();
         
         container.innerHTML = sorted.map(([name, amount], index) => {
             const percentage = total > 0 ? (amount / total * 100) : 0;
@@ -853,7 +896,7 @@ class ExpenseFlow {
                     <div class="cat-bar">
                         <div class="cat-bar-fill" style="width: ${percentage}%; background: ${colors[index % colors.length]};"></div>
                     </div>
-                    <span class="cat-amount">$${amount.toFixed(2)}</span>
+                    <span class="cat-amount">${currency}${amount.toFixed(2)}</span>
                 </div>
             `;
         }).join('');
@@ -865,7 +908,6 @@ class ExpenseFlow {
     updateUI() {
         // Update transaction count in nav
         const count = this.transactions.length;
-        // Could add badge here if desired
     }
 }
 
