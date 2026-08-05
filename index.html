@@ -36,6 +36,10 @@
                     <i class="fas fa-list-ul"></i>
                     <span data-i18n="navTransactions">Transactions</span>
                 </a>
+                <a href="#" class="nav-item" data-view="calendar">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span data-i18n="navCalendar">Calendar</span>
+                </a>
                 <a href="#" class="nav-item" data-view="analytics">
                     <i class="fas fa-chart-line"></i>
                     <span data-i18n="navAnalytics">Analytics</span>
@@ -46,6 +50,10 @@
                 <button class="btn btn-language" id="toggleLanguage">
                     <i class="fas fa-globe"></i>
                     <span>فارسی / EN</span>
+                </button>
+                <button class="btn btn-darkmode" id="toggleDarkMode">
+                    <i class="fas fa-moon"></i>
+                    <span data-i18n="darkMode">Dark Mode</span>
                 </button>
                 <button class="btn btn-danger" id="clearAllData">
                     <i class="fas fa-trash-alt"></i>
@@ -152,7 +160,6 @@
                     <div class="filter-group">
                         <select id="categoryFilter">
                             <option value="all" data-i18n="allCategories">All Categories</option>
-                            <!-- Income Categories -->
                             <optgroup label="Income">
                                 <option value="salary">💼 Salary</option>
                                 <option value="freelance">💻 Freelance</option>
@@ -160,7 +167,6 @@
                                 <option value="gift">🎁 Gift</option>
                                 <option value="other_income">📌 Other Income</option>
                             </optgroup>
-                            <!-- Expense Categories -->
                             <optgroup label="Expenses">
                                 <option value="food">🍔 Food</option>
                                 <option value="transport">🚗 Transport</option>
@@ -178,12 +184,43 @@
                             <option value="expense" data-i18n="expense">Expense</option>
                         </select>
                     </div>
+                    <div class="import-export-buttons">
+                        <button class="btn btn-outline btn-sm" id="importCSV">
+                            <i class="fas fa-file-import"></i> CSV
+                        </button>
+                        <button class="btn btn-outline btn-sm" id="exportCSV">
+                            <i class="fas fa-file-export"></i> CSV
+                        </button>
+                        <button class="btn btn-outline btn-sm" id="exportPDF">
+                            <i class="fas fa-file-pdf"></i> PDF
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="transaction-list full-list" id="fullTransactionList">
                     <p style="text-align: center; color: #9ca3af; padding: 40px 0;" data-i18n="noTransactions">
                         No transactions yet.
                     </p>
+                </div>
+            </section>
+            
+            <!-- Calendar View -->
+            <section id="calendarView" class="view-section">
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button class="btn btn-outline" id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                        <h2 id="calendarTitle">January 2024</h2>
+                        <button class="btn btn-outline" id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Calendar will be rendered here -->
+                    </div>
+                    <div class="calendar-transactions" id="calendarTransactions">
+                        <h3 data-i18n="transactionsForDay">Transactions for this day</h3>
+                        <div id="calendarDayTransactions">
+                            <p style="color: #9ca3af; text-align: center; padding: 20px;">Select a date to view transactions</p>
+                        </div>
+                    </div>
                 </div>
             </section>
             
@@ -222,14 +259,16 @@
         </main>
     </div>
     
-    <!-- Add Transaction Modal -->
+    <!-- Add/Edit Transaction Modal -->
     <div class="modal" id="addModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 data-i18n="addTransaction">Add Transaction</h2>
+                <h2 id="modalTitle" data-i18n="addTransaction">Add Transaction</h2>
                 <button class="modal-close" id="closeModal">&times;</button>
             </div>
             <form id="transactionForm">
+                <input type="hidden" id="editId" value="" />
+                
                 <div class="form-group">
                     <label data-i18n="type">Type</label>
                     <div class="type-toggle">
@@ -266,7 +305,6 @@
                     <label for="transactionCategory" data-i18n="category">Category</label>
                     <select id="transactionCategory" required>
                         <option value="" data-i18n="selectCategory">Select a category</option>
-                        <!-- Income Categories -->
                         <optgroup label="Income">
                             <option value="salary">💼 Salary</option>
                             <option value="freelance">💻 Freelance</option>
@@ -274,7 +312,6 @@
                             <option value="gift">🎁 Gift</option>
                             <option value="other_income">📌 Other Income</option>
                         </optgroup>
-                        <!-- Expense Categories -->
                         <optgroup label="Expenses">
                             <option value="food">🍔 Food</option>
                             <option value="transport">🚗 Transport</option>
@@ -293,12 +330,15 @@
                     <input type="date" id="transactionDate" required />
                 </div>
                 
-                <button type="submit" class="btn btn-primary btn-full">
+                <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
                     <i class="fas fa-plus"></i> <span data-i18n="addTransaction">Add Transaction</span>
                 </button>
             </form>
         </div>
     </div>
+    
+    <!-- Hidden file input for import -->
+    <input type="file" id="fileInput" accept=".csv" style="display:none" />
     
     <script src="script.js"></script>
 </body>
