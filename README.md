@@ -1,230 +1,243 @@
 # 💰 ExpenseFlow
 
- A modern, bilingual personal finance tracker with dark mode, calendar view, and multi-currency support.
+A modern, bilingual personal finance tracker with **dark mode, calendar view, analytics, and multi-currency support**.
 
---- 
-## ✨ Features
-
-### 🎯 Core Features
-- **Dashboard** - Quick overview of balance, income, expenses, and savings rate
-- **Transaction Management** - Add, view, search, filter, edit, and delete transactions
-- **Charts** - Visual spending breakdown by category and income vs expenses
-- **Analytics** - Monthly summary and top spending categories
-- **Local Storage** - All data persists after browser refresh
-- **Responsive** - Works on desktop, tablet, and mobile
-
-### 🌟 Version 3.0 New Features
-
-#### 🌐 Bilingual Support
-- Switch between **English** and **Persian (Farsi)** with one click
-- Full RTL (Right-to-Left) layout support for Persian
-- All labels, categories, and messages translated
-
-#### 🌙 Dark Mode
-- Toggle between light and dark themes
-- Optimized contrast for readability
-- Consistent color scheme across all views
-- System preference detection
-
-#### 📅 Calendar View
-- Visual monthly calendar with transaction indicators
-- Click any date to see day's transactions
-- Navigate between months easily
-- Transaction totals shown on each day
-
-#### 💰 Multi-Currency Support
-- **USD ($)** - US Dollar
-- **EUR (€)** - Euro
-- **IRR (﷼)** - Iranian Rial
-- Each transaction stores its own currency
-- Smart default currency detection
-
-#### 📊 Advanced Features
-- **Edit Transactions** - Modify any existing transaction
-- **Number Formatting** - Thousands separators (1,234.56 or ۱٬۲۳۴٫۵۶)
-- **Import CSV** - Bulk import transactions from CSV files
-- **Export CSV** - Download all transactions as CSV
-- **Export PDF** - Generate professional PDF reports
-
-#### 🎨 UI/UX Improvements
-- Modern fintech-inspired design
-- Smooth animations and transitions
-- Responsive mobile-first layout
-- Accessible color palette
-- Clear visual hierarchy
+**🌐 Live Demo:** [ExpenseFlow](https://jimmy001bro.github.io/ExpenseFlow/)
 
 ---
 
-## 🚀 Quick Start
+## ✨ Features
+
+### 🎯 Core Features
+
+* **Dashboard** — Overview of balance, income, expenses, and savings rate
+* **Transaction Management** — Add, view, search, filter, edit, and delete transactions
+* **Charts** — Visual spending breakdown and income vs. expenses
+* **Analytics** — Monthly summaries and top spending categories
+* **Local Storage** — Data persists after browser refresh
+* **Responsive Design** — Works across desktop, tablet, and mobile devices
+
+### 🌟 Version 3.0
+
+#### 🌐 Bilingual Support
+
+* Switch between **English** and **Persian (Farsi)**
+* Full **RTL (Right-to-Left)** layout support
+* Translated labels, categories, messages, and interface elements
+
+#### 🌙 Dark Mode
+
+* Toggle between light and dark themes
+* Optimized contrast for readability
+* Consistent styling across the application
+* System preference detection
+
+#### 📅 Calendar View
+
+* Monthly calendar displaying transaction indicators
+* Click a date to view that day's transactions
+* Navigate between months
+* View transaction totals for individual days
+
+#### 💰 Multi-Currency Support
+
+* **USD ($)** — US Dollar
+* **EUR (€)** — Euro
+* **IRR (﷼)** — Iranian Rial
+* Each transaction stores its own currency
+* Smart default currency detection
+
+#### 📊 Advanced Features
+
+* **Edit Transactions** — Modify existing transactions
+* **Number Formatting** — Supports English and Persian number formatting
+* **Import CSV** — Import multiple transactions from CSV files
+* **Export CSV** — Download transaction data as CSV
+* **Export PDF** — Generate print-ready PDF reports
+
+#### 🎨 UI/UX Improvements
+
+* Modern fintech-inspired interface
+* Smooth animations and transitions
+* Accessible color palette
+* Clear visual hierarchy
+
+---
+
+## 🚀 Getting Started
 
 ### Option 1: Live Demo
-Visit the live version: [https://jimmy001bro.github.io/ExpenseFlow/](https://jimmy001bro.github.io/ExpenseFlow/)
 
-### Option 2: Local Development
+You can use ExpenseFlow directly in your browser:
 
-1. **Clone the repository:**
+**[Open ExpenseFlow →](https://jimmy001bro.github.io/ExpenseFlow/)**
+
+### Option 2: Run Locally
+
+#### 1. Clone the repository
+
 ```bash
-git clone https://github.com/jimmy001bro/ExpenseFlow.git
+git clone https://github.com/Jimmy001bro/ExpenseFlow.git
 cd ExpenseFlow
 ```
 
-2. **Open in browser:**
-```bash
-# Just open index.html in your browser
-open index.html
-# or
-start index.html
-```
+#### 2. Open the application
 
-3. **Start tracking your finances!**
+Open `index.html` directly in your browser.
 
+No server, package manager, or additional dependencies are required.
 
+#### 3. Start tracking your finances
 
-🛠️ Technologies
+Your data is stored locally in your browser using Local Storage.
 
-    HTML5 - Semantic markup
+---
 
-    CSS3 - Custom properties, Flexbox, Grid, RTL support
+## 🛠️ Technologies
 
-    Vanilla JavaScript - ES6+ with classes
+* **HTML5** — Semantic markup
+* **CSS3** — Custom properties, Flexbox, Grid, and RTL support
+* **Vanilla JavaScript** — ES6+ application logic
+* **Chart.js** — Responsive charts and data visualization
+* **Font Awesome** — Interface icons
+* **Google Fonts**
 
-    Chart.js - Beautiful responsive charts
+  * Inter for English
+  * Vazirmatn for Persian
 
-    Font Awesome - Icon library
+---
 
-    Google Fonts - Inter (English) & Vazirmatn (Persian)
+## 🎯 Usage Guide
 
-🎯 Usage Guide
-Adding a Transaction
+### Adding a Transaction
 
-    Click "Add Transaction" button
+1. Click **Add Transaction**
+2. Select **Income** or **Expense**
+3. Enter:
 
-    Select Income or Expense
+   * Description
+   * Amount
+   * Currency
+   * Category
+   * Date
+4. Click **Add Transaction**
 
-    Fill in:
+### Editing a Transaction
 
-        Description
+1. Find the transaction you want to modify
+2. Click the **✏️ Edit** button
+3. Modify the required fields
+4. Click **Edit Transaction** to save
 
-        Amount
+### Searching & Filtering
 
-        Currency
+Use the search and filter controls to find specific transactions.
 
-        Category
+You can filter by:
 
-        Date
+* Description
+* Category
+* Transaction type
+* Income or expense
 
-    Click "Add Transaction"
+### Calendar View
 
-Editing a Transaction
+1. Open **Calendar** from the navigation
+2. Navigate between months using the arrow buttons
+3. Select a date with a transaction indicator
+4. View the transactions for that day
 
-    Click the ✏️ (Edit) button on any transaction
+### Dark Mode
 
-    Modify any field
+Click the **🌙 / ☀️** button in the sidebar to switch between light and dark themes.
 
-    Click "Edit Transaction" to save
+Your preference is saved in your browser.
 
-Searching & Filtering
+### Switching Languages
 
-    Use the search bar to find transactions by description
+Click the **🌐** button in the sidebar to switch between English and Persian.
 
-    Filter by category (Income/Expense categories)
+The interface updates automatically and supports RTL layout when Persian is selected.
 
-    Filter by type (Income/Expense)
+### Import & Export
 
-Calendar View
+* **Import CSV** — Import transactions from a CSV file
+* **Export CSV** — Download your transaction data as CSV
+* **Export PDF** — Generate a print-ready financial report
 
-    Click "Calendar" in navigation
+---
 
-    Navigate months using ← and → buttons
+## 📄 CSV Format
 
-    Click any date with a dot to see transactions
+ExpenseFlow accepts CSV files using the following structure:
 
-    View transaction details for that day
-
-Dark Mode
-
-    Click the 🌙/☀️ button in sidebar
-
-    Toggle between light and dark themes
-
-    Preference is saved in your browser
-
-Switching Language
-
-    Click the 🌐 button in sidebar
-
-    Toggle between English and Persian
-
-    All UI elements update instantly
-
-    RTL layout for Persian
-
-Import/Export
-
-    Import CSV: Click CSV button → Select file
-
-    Export CSV: Click CSV button → Downloads automatically
-
-    Export PDF: Click PDF button → Opens print-ready report
-
-CSV Format
-csv
-
+```csv
 Type,Description,Amount,Currency,Category,Date
 income,Salary,4850.00,$,salary,2024-01-15
 expense,Groceries,234.67,$,food,2024-01-14
+```
 
-📁 Project Structure
-text
+---
 
+## 📁 Project Structure
+
+```text
 ExpenseFlow/
 ├── .github/
 │   └── workflows/
 │       └── static.yml          # GitHub Pages deployment workflow
 ├── index.html                  # Main HTML file
-├── style.css                   # Complete stylesheet
+├── style.css                   # Application stylesheet
 ├── script.js                   # Application logic
-└── README.md                   # Documentation
+└── README.md                   # Project documentation
+```
+
+---
+
+## 🎨 Design Philosophy
+
+ExpenseFlow focuses on keeping personal finance management **simple, clear, and accessible**.
+
+* **Clean & Modern** — Fintech-inspired interface
+* **Accessible** — Designed with readable contrast and clear hierarchy
+* **Responsive** — Works across different screen sizes
+* **Bilingual** — Full English and Persian support
+* **Lightweight** — Built with vanilla JavaScript without heavy frameworks
+
+---
 
 
-🎨 Design Philosophy
+## 📜 License
 
-    Clean & Modern - Inspired by fintech apps
+This project is open source and available under the **MIT License**.
 
-    Accessible - WCAG-compliant color contrast
+See the [`LICENSE`](LICENSE) file for details.
 
-    Responsive - Works on all screen sizes
+---
 
-    Bilingual - Full English and Persian support
+## 🙏 Acknowledgments
 
-    Performant - Vanilla JS, no heavy frameworks
+* [Chart.js](https://www.chartjs.org/) — Data visualization
+* [Font Awesome](https://fontawesome.com/) — Icons
+* [Inter](https://fonts.google.com/specimen/Inter) — English typography
+* [Vazirmatn](https://github.com/rastikerdar/vazirmatn) — Persian typography
+* GitHub Pages — Hosting
+* GitHub Actions — Deployment automation
 
+---
 
- 📝 License
+## 📧 Contact
 
-This project is open source and available under the MIT License.
+**Nima Ebrahimi**
 
-See the LICENSE file for details.
- 🙏 Acknowledgments
+* Email: [nima80ir@gmail.com](mailto:nima80ir@gmail.com)
+* GitHub: [@Jimmy001bro](https://github.com/Jimmy001bro)
 
-    Chart.js - Beautiful charts
+**Project Repository:**
+[github.com/Jimmy001bro/ExpenseFlow](https://github.com/Jimmy001bro/ExpenseFlow)
 
-    Font Awesome - Icons
+---
 
-    Inter Font - English typography
+Made with ❤️ by **Jimmy**
 
-    Vazirmatn Font - Persian typography
-
-    GitHub Pages - Hosting
-
-    GitHub Actions - CI/CD
-
- 📧 Contact
-
-Nima Ebrahimi - [nima80ir@gmail.com][jmharpi.tech@gmail.com]
-
-Project Link: (https://github.com/Jimmy001bro/ExpenseFlow)
-
- Made with ❤️ by Jimmy
-
-⭐ Star this repo if you find it useful!
+⭐ If you find ExpenseFlow useful, consider giving the repository a star!
