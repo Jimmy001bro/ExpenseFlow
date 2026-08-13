@@ -2,7 +2,7 @@
 
  A modern, bilingual personal finance tracker with dark mode, calendar view, and multi-currency support.
 
- 
+--- 
 ## ✨ Features
 
 ### 🎯 Core Features
@@ -78,7 +78,7 @@ start index.html
 
 3.  Start tracking your finances!
 
-
+---
 
 🛠️ Technologies
 
