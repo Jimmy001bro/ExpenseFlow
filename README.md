@@ -66,19 +66,19 @@ Visit the live version: [https://jimmy001bro.github.io/ExpenseFlow/](https://jim
 ```bash
 git clone https://github.com/jimmy001bro/ExpenseFlow.git
 cd ExpenseFlow
+```
 
-2. Open in browser:
-
-bash
-
+2. **Open in browser:**
+```bash
 # Just open index.html in your browser
 open index.html
 # or
 start index.html
+```
 
-3.  Start tracking your finances!
+3. **Start tracking your finances!**
 
----
+
 
 🛠️ Technologies
 
@@ -200,12 +200,12 @@ ExpenseFlow/
     Performant - Vanilla JS, no heavy frameworks
 
 
-📝 License
+ 📝 License
 
 This project is open source and available under the MIT License.
 
 See the LICENSE file for details.
-🙏 Acknowledgments
+ 🙏 Acknowledgments
 
     Chart.js - Beautiful charts
 
@@ -219,18 +219,12 @@ See the LICENSE file for details.
 
     GitHub Actions - CI/CD
 
-📞 Support
-
-    GitHub Issues: Report a bug
-
-    Live Demo: jimmy001bro.github.io/ExpenseFlow/
-
-📧 Contact
+ 📧 Contact
 
 Nima Ebrahimi - [nima80ir@gmail.com][jmharpi.tech@gmail.com]
 
 Project Link: (https://github.com/Jimmy001bro/ExpenseFlow)
 
-Made with ❤️ by Jimmy
+ Made with ❤️ by Jimmy
 
 ⭐ Star this repo if you find it useful!
