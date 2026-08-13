@@ -63,6 +63,30 @@ A modern, bilingual personal finance tracker with **dark mode, calendar view, an
 * Clear visual hierarchy
 
 ---
+## 🔒 Privacy & Data Security
+
+### How Your Data is Handled
+- ✅ **100% Local Storage** - All data stays in your browser
+- ✅ **No Cloud Sync** - Data never leaves your device
+- ✅ **No Tracking** - No analytics, no cookies, no tracking pixels
+- ✅ **No Data Collection** - We don't collect, store, or sell anything
+
+### User Responsibility
+- You are responsible for backing up your data
+- Clearing browser data will delete your transactions
+- Export your data regularly using CSV/PDF export
+
+### Disclaimer
+This application is provided for informational and organizational purposes only. 
+It is not financial advice. Always consult a qualified financial professional for 
+financial decisions.
+
+### Third-Party Services
+This app uses these external resources (no data is sent to them):
+- Chart.js (CDN) - For charts
+- Font Awesome (CDN) - For icons
+- Google Fonts (CDN) - For typography
+
 
 ## 🚀 Getting Started
 
