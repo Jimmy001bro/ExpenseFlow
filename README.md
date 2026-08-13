@@ -67,7 +67,7 @@ Visit the live version: [https://jimmy001bro.github.io/ExpenseFlow/](https://jim
 git clone https://github.com/jimmy001bro/ExpenseFlow.git
 cd ExpenseFlow
 
-    Open in browser:
+2. Open in browser:
 
 bash
 
@@ -76,7 +76,9 @@ open index.html
 # or
 start index.html
 
-    Start tracking your finances!
+3.  Start tracking your finances!
+
+
 
 🛠️ Technologies
 
