@@ -89,7 +89,9 @@ class ExpenseFlow {
                 transactionsForDay: 'Transactions for this day',
                 january: 'January', february: 'February', march: 'March', april: 'April',
                 may: 'May', june: 'June', july: 'July', august: 'August',
-                september: 'September', october: 'October', november: 'November', december: 'December'
+                september: 'September', october: 'October', november: 'November', december: 'December',
+                disclaimerText: 'For informational purposes only. Not financial advice. All data is stored locally in your browser.',
+                learnMore: 'Learn more'
             },
             fa: {
                 appName: '💰 مدیریت مالی',
@@ -148,7 +150,9 @@ class ExpenseFlow {
                 transactionsForDay: 'تراکنش‌های این روز',
                 january: 'ژانویه', february: 'فوریه', march: 'مارس', april: 'آوریل',
                 may: 'مه', june: 'ژوئن', july: 'ژوئیه', august: 'اوت',
-                september: 'سپتامبر', october: 'اکتبر', november: 'نوامبر', december: 'دسامبر'
+                september: 'سپتامبر', october: 'اکتبر', november: 'نوامبر', december: 'دسامبر',
+                disclaimerText: 'فقط برای اهداف اطلاع‌رسانی. توصیه مالی نیست. تمام داده‌ها به صورت محلی در مرورگر شما ذخیره می‌شوند.',
+                learnMore: 'بیشتر بدانید'
             }
         };
     }
@@ -208,6 +212,23 @@ class ExpenseFlow {
     }
     
     // ==========================================
+    // PRIVACY INFO
+    // ==========================================
+    showPrivacyInfo() {
+        alert(
+            '🔒 Privacy & Data Security\n\n' +
+            '✅ All data is stored locally in your browser\n' +
+            '✅ No data is sent to any server\n' +
+            '✅ No tracking or analytics\n' +
+            '✅ No cookies used\n\n' +
+            '⚠️ You are responsible for backing up your data.\n' +
+            'This app is for informational purposes only.\n' +
+            'Not financial advice.\n\n' +
+            '📧 Contact: nima80ir@gmail.com'
+        );
+    }
+    
+    // ==========================================
     // INITIALIZATION
     // ==========================================
     init() {
@@ -225,6 +246,9 @@ class ExpenseFlow {
         this.setupCharts();
         this.renderCalendar();
         this.updateUI();
+        
+        // Make showPrivacyInfo globally accessible for the footer link
+        window.showPrivacyInfo = () => this.showPrivacyInfo();
     }
     
     // ==========================================
@@ -1212,7 +1236,6 @@ class ExpenseFlow {
             return;
         }
         
-        // Simple PDF export using window.print()
         const printWindow = window.open('', '_blank');
         const currency = this.getDefaultCurrency();
         const totalIncome = this.transactions.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
@@ -1302,7 +1325,6 @@ class ExpenseFlow {
     // UI HELPERS
     // ==========================================
     updateUI() {
-        // Update dark mode button
         const btn = document.getElementById('toggleDarkMode');
         if (btn) {
             btn.innerHTML = this.darkMode ? 
